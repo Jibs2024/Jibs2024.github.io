@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #1a2333;
+    --navy-deep: #0f1520;
+    --navy-mid: #243044;
+    --gold: #B8962E;
+    --gold-light: #d4ae4e;
+    --gold-pale: #f5eed8;
+    --white: #ffffff;
+    --off-white: #f8f6f1;
+    --grey: #8a8a8a;
+    --grey-light: #e8e5de;
+    --text-dark: #1a2333;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy-deep);
+    color: var(--white);
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(15,21,32,0.95);
+    backdrop-filter: blur(8px);
+    padding: 0 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    border-bottom: 1px solid rgba(184,150,46,0.2);
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 0.08em;
+    color: var(--white);
+  }
+
+  .nav-logo span { color: var(--gold); }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  /* SECTIONS */
+  section { min-height: 100vh; }
+
+  /* COVER */
+  .cover {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  .cover-left {
+    background: var(--navy-deep);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 4rem 4rem 5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .cover-left::after {
+    content: '';
+    position: absolute;
+    right: -60px;
+    top: 0; bottom: 0;
+    width: 120px;
+    background: var(--navy-deep);
+    transform: skewX(-4deg);
+    z-index: 3;
+  }
+
+  .cover-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+
+  .cover-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+  }
+
+  .cover-title span { color: var(--gold); display: block; }
+
+  .cover-tagline {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 3rem;
+    max-width: 380px;
+    line-height: 1.5;
+  }
+
+  .cover-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .tag {
+    padding: 0.35rem 1rem;
+    border: 1px solid rgba(184,150,46,0.4);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+  }
+
+  .cover-licence {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.06em;
+    line-height: 1.8;
+  }
+
+  .cover-right {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover-photo {
+    position: absolute;
+    inset: 0;
+    background-image: url('OTTO 1 Apartments.jpg'); background-size: cover; background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cover-photo-placeholder {
+    text-align: center;
+    color: rgba(255,255,255,0.15);
+  }
+
+  .cover-photo-placeholder .big-icon {
+    font-size: 5rem;
+    display: block;
+    margin-bottom: 1rem;
+    color: rgba(184,150,46,0.2);
+  }
+
+  .cover-photo-placeholder p {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .cover-photo::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      rgba(184,150,46,0.03) 40px,
+      rgba(184,150,46,0.03) 41px
+    );
+  }
+
+  .cover-year {
+    position: absolute;
+    bottom: 3rem;
+    right: 3rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 8rem;
+    color: rgba(255,255,255,0.04);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  /* GOLD LINE DIVIDER */
+  .gold-line {
+    width: 48px;
+    height: 2px;
+    background: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+
+  /* OVERVIEW */
+  .overview {
+    background: var(--off-white);
+    color: var(--text-dark);
+    padding: 8rem 5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .overview-left h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    line-height: 1;
+    color: var(--navy);
+    margin-bottom: 1.5rem;
+  }
+
+  .overview-left h2 em {
+    color: var(--gold);
+    font-style: normal;
+    display: block;
+  }
+
+  .overview-left p {
+    font-size: 0.95rem;
+    color: #444;
+    line-height: 1.8;
+    margin-bottom: 1.2rem;
+  }
+
+  .overview-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .overview-tile {
+    padding: 1.5rem;
+    border-left: 3px solid var(--gold);
+    background: var(--white);
+  }
+
+  .overview-tile h3 {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .overview-tile p {
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.6;
+  }
+
+  .licence-row {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--grey-light);
+  }
+
+  .licence-item {
+    font-size: 0.75rem;
+    color: var(--grey);
+    line-height: 1.6;
+  }
+
+  .licence-item strong {
+    display: block;
+    color: var(--navy);
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.65rem;
+  }
+
+  /* DIRECTOR */
+  .director {
+    background: var(--navy);
+    padding: 8rem 5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+ .director-photo-box {
+    position: relative;
+    width: 65%;
+    aspect-ratio: 3/4;
+    max-height: 1000px;
+    overflow: visible;
+  }
+  .director-photo-box::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    right: -12px;
+    bottom: -12px;
+    border: 1px solid rgba(184,150,46,0.3);
+    pointer-events: none;
+    z-index: 10;
+  }
+  .director-photo-box img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .photo-placeholder {
+    text-align: center;
+    color: rgba(255,255,255,0.2);
+  }
+
+  .photo-placeholder p {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 1rem;
+  }
+
+  .director-content h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    line-height: 1;
+    color: var(--white);
+    margin-bottom: 0.3rem;
+  }
+
+  .director-title {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+  }
+
+  .director-content p {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .quals-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .qual-box {
+    padding: 1rem 1.2rem;
+    background: rgba(255,255,255,0.04);
+    border-top: 2px solid var(--gold);
+  }
+
+  .qual-box p {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* SERVICES OVERVIEW */
+  .services-overview {
+    background: var(--navy-deep);
+    padding: 8rem 5rem;
+    text-align: center;
+  }
+
+  .section-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .section-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+
+  .section-sub {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 4rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .streams-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin-top: 3rem;
+  }
+
+  .stream-tile {
+    padding: 3rem 2.5rem;
+    position: relative;
+    text-align: left;
+  }
+
+  .stream-tile:nth-child(1) { background: var(--navy-mid); }
+  .stream-tile:nth-child(2) { background: var(--gold); }
+  .stream-tile:nth-child(3) { background: var(--navy); }
+
+  .stream-tile:nth-child(2) * { color: var(--navy-deep) !important; }
+  .stream-tile:nth-child(2) .stream-num { color: rgba(0,0,0,0.15) !important; }
+
+  .stream-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 5rem;
+    line-height: 1;
+    color: rgba(255,255,255,0.06);
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+  }
+
+  .stream-tile h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 0.03em;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+
+  .stream-tile p {
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.7;
+  }
+
+  /* SERVICE DETAIL SECTIONS */
+  .service-section {
+    padding: 7rem 5rem;
+  }
+
+  .service-section.light {
+    background: var(--off-white);
+    color: var(--text-dark);
+  }
+
+  .service-section.dark {
+    background: var(--navy);
+    color: var(--white);
+  }
+
+  .service-section.mid {
+    background: var(--navy-mid);
+    color: var(--white);
+  }
+
+  .service-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+    margin-bottom: 4rem;
+  }
+
+  .service-header-left .stream-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+
+  .service-section.light .stream-label { color: var(--gold); }
+
+  .service-header-left h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1;
+    margin-bottom: 0;
+  }
+
+  .service-section.light .service-header-left h2 { color: var(--navy); }
+
+  .service-header-right p {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    opacity: 0.75;
+  }
+
+  .service-tiles {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.1);
+  }
+
+  .service-section.light .service-tiles {
+    background: var(--grey-light);
+  }
+
+  .service-tile {
+    padding: 2rem 1.75rem;
+    background: var(--navy-mid);
+  }
+
+  .service-section.dark .service-tile { background: var(--navy); }
+  .service-section.mid .service-tile { background: var(--navy-mid); }
+
+  .service-section.light .service-tile {
+    background: var(--white);
+  }
+
+  .service-tile h4 {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+  }
+
+  .service-tile p {
+    font-size: 0.825rem;
+    line-height: 1.7;
+    opacity: 0.7;
+  }
+
+  .service-section.light .service-tile p { color: #555; }
+  .service-section.light .service-tile h4 { color: var(--gold); }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .project-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-photo {
+  aspect-ratio: 4/3;
+  background: var(--navy-mid);
+  background-size: cover;
+  background-position: top;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+  .service-section.light .project-photo {
+    background: var(--grey-light);
+  }
+
+  .project-photo-text {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.2);
+    text-align: center;
+  }
+
+  .service-section.light .project-photo-text { color: rgba(0,0,0,0.2); }
+
+  .project-info {
+    padding: 1.25rem 0 0;
+  }
+
+  .project-info h4 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .service-section.light .project-info h4 { color: var(--navy); }
+
+  .project-meta {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.75rem;
+  }
+
+  .project-meta-item {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .project-meta-item span {
+    display: block;
+    color: var(--gold);
+    margin-bottom: 0.15rem;
+  }
+
+  .project-meta-item p {
+    opacity: 0.7;
+    font-size: 0.75rem;
+  }
+
+  .service-section.light .project-meta-item p { color: #555; }
+
+  .project-desc {
+    font-size: 0.825rem;
+    line-height: 1.6;
+    opacity: 0.6;
+    margin-top: 0.5rem;
+  }
+
+  .service-section.light .project-desc { color: #444; }
+
+  /* PROCESS */
+  .process {
+    background: var(--off-white);
+    color: var(--text-dark);
+    padding: 8rem 5rem;
+  }
+
+  .process-header {
+    margin-bottom: 4rem;
+  }
+
+  .process-header h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .process-header p {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--grey);
+  }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+
+  .process-step {
+    padding: 2.5rem 2rem;
+    border-top: 3px solid var(--grey-light);
+    position: relative;
+  }
+
+  .process-step:first-child { border-top-color: var(--gold); }
+
+  .step-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 4rem;
+    line-height: 1;
+    color: rgba(0,0,0,0.06);
+    margin-bottom: 1rem;
+  }
+
+  .step-title {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+
+  .step-desc {
+    font-size: 0.875rem;
+    color: #555;
+    line-height: 1.7;
+  }
+
+  /* CONTACT */
+  .contact {
+    background: var(--navy-deep);
+    padding: 8rem 5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .contact-left h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 5vw, 5rem);
+    line-height: 0.95;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-left h2 em {
+    color: var(--gold);
+    font-style: normal;
+    display: block;
+  }
+
+  .contact-left p {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.8;
+    max-width: 420px;
+  }
+
+  .contact-right {
+    padding: 3rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(184,150,46,0.2);
+  }
+
+  .contact-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--white);
+    margin-bottom: 0.25rem;
+  }
+
+  .contact-role {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2.5rem;
+  }
+
+  .contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .contact-detail {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .contact-detail-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    min-width: 60px;
+    padding-top: 0.1rem;
+  }
+
+  .contact-detail-value {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.8);
+  }
+
+  .contact-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.08);
+    margin: 2rem 0;
+  }
+
+  .contact-licence {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.3);
+    line-height: 1.8;
+  }
+
+  .closing-line {
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(184,150,46,0.2);
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: rgba(255,255,255,0.35);
+    text-align: center;
+    grid-column: 1 / -1;
+  }
+
+  .projects-note {
+    font-size: 0.75rem;
+    font-style: italic;
+    opacity: 0.45;
+    margin-bottom: 2rem;
+    padding: 1rem 1.5rem;
+    border-left: 2px solid var(--gold);
+  }
+
+  @media print {
+    nav { display: none; }
+    section { page-break-inside: avoid; }
+  }
+
+  @media (max-width: 900px) {
+    .cover, .overview, .director, .contact { grid-template-columns: 1fr; }
+    .cover-left::after { display: none; }
+    .streams-grid, .service-tiles, .process-steps { grid-template-columns: 1fr 1fr; }
+    .projects-grid { grid-template-columns: 1fr 1fr; }
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    .overview, .director, .service-section, .process, .contact { padding: 5rem 2rem; }
+    .cover-left { padding: 6rem 2rem 3rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">STUD <span>&</span> BEAM</div>
+  <ul class="nav-links">
+    <li><a href="#overview">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- COVER -->
+<section class="cover" id="cover">
+  <div class="cover-left">
+    <h1 class="cover-title">
+      Stud
+      <span>&amp; Beam</span>
+      Constructions
+    </h1>
+    <p class="cover-tagline">Built from the Ground Up. Ready for Whatever Comes Next.</p>
+    <div class="cover-tags">
+      <span class="tag">New Builds</span>
+      <span class="tag">Remedial</span>
+      <span class="tag">Fit-Outs</span>
+    </div>
+    <div class="cover-licence">
+      Sydney, NSW &nbsp;&nbsp;|&nbsp;&nbsp; Builders Licence: 470860C<br>
+      Building Practitioner: BUP4254551
+    </div>
+  </div>
+  <div class="cover-right">
+    <div class="cover-photo" style="background-image: url('OTTO 1 Apartments.jpg'); background-size: cover; background-position: 50% 20%;">
+    </div>
+    <div class="cover-year">2026</div>
+  </div>
+</section>
+
+<!-- COMPANY OVERVIEW -->
+<section class="overview" id="overview">
+  <div class="overview-left">
+    <div class="gold-line"></div>
+    <h2>Who <em>We Are</em></h2>
+    <p>Stud and Beam Constructions is a Sydney based building contractor delivering across the full lifecycle of a home or property. From new residential builds and renovations through to remedial works and building maintenance, we bring genuine trade knowledge and disciplined project management to every job.</p>
+    <p>We work with architects, developers, engineers, strata managers, and private clients across Sydney to deliver outcomes that are compliant, practical, and built to last.</p>
+    <div class="licence-row">
+      <div class="licence-item">
+        <strong>Builders Licence</strong>
+        470860C
+      </div>
+      <div class="licence-item">
+        <strong>Building Practitioner</strong>
+        BUP4254551
+      </div>
+      <div class="licence-item">
+        <strong>Location</strong>
+        Sydney, NSW
+      </div>
+    </div>
+  </div>
+  <div class="overview-right">
+    <div class="overview-tile">
+      <h3>Hands-On Construction Experience</h3>
+      <p>Delivered by a qualified carpenter and builder with experience across new builds, renovations, and remedial works from the ground up.</p>
+    </div>
+    <div class="overview-tile">
+      <h3>Collaborative Delivery</h3>
+      <p>Clear communication with architects, engineers, consultants, strata, and stakeholders from planning through to completion.</p>
+    </div>
+    <div class="overview-tile">
+      <h3>Safe and Organised Sites</h3>
+      <p>Structured sequencing, clean work areas, and safety first delivery no matter the project.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DIRECTOR -->
+<section class="director" id="director">
+  <div class="director-photo-box">
+    <img src="Selfie - Company Photo.jpeg">
+  </div>
+  <div class="director-content">
+    <div class="gold-line"></div>
+    <h2>Jibril El-Ahmad</h2>
+    <p class="director-title">Director &nbsp;|&nbsp; Builder &nbsp;|&nbsp; Project Manager</p>
+    <p>Jibril brings a career that spans the full breadth of the building industry. Starting out as a qualified carpenter and builder working on the tools, he progressed into project management roles delivering complex remedial and commercial works before establishing Stud and Beam Constructions.</p>
+    <p>That trade foundation sets Jibril apart. He understands buildings from the inside out — the sequencing of a frame, the detail behind a waterproofing system, the practical challenges of working in occupied spaces. That knowledge directly improves planning, scoping, and outcomes on site.</p>
+    <p>His approach is straightforward: clear communication, careful sequencing, and disciplined execution from start to finish.</p>
+    <div class="quals-grid">
+      <div class="qual-box"><p>Qualified Carpenter and Builder</p></div>
+      <div class="qual-box"><p>Builders Licence 470860C</p></div>
+      <div class="qual-box"><p>Building Practitioner BUP4254551</p></div>
+      <div class="qual-box"><p>Construction Project Management</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES OVERVIEW -->
+<section class="services-overview" id="services">
+  <p class="section-eyebrow">Our Services</p>
+  <h2 class="section-heading">Three Streams. One Team.</h2>
+  <p class="section-sub">The same standard of delivery across every project, every time.</p>
+  <div class="streams-grid">
+    <div class="stream-tile">
+      <span class="stream-num">01</span>
+      <h3>New Builds</h3>
+      <p>Custom residential homes and small scale development, delivered from DA through to practical completion.</p>
+    </div>
+    <div class="stream-tile">
+      <span class="stream-num">02</span>
+      <h3>Remedial</h3>
+      <p>Defect rectification, waterproofing, facade repairs, concrete repair, and building maintenance across residential and commercial buildings.</p>
+    </div>
+    <div class="stream-tile">
+      <span class="stream-num">03</span>
+      <h3>Fit Out</h3>
+      <p>End to end delivery of commercial fit outs across office, retail, and hospitality tenancies with a focus on programme, compliance, and quality finishes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NEW BUILDS -->
+<section class="service-section light" id="new-builds">
+  <div class="service-header">
+    <div class="service-header-left">
+      <p class="stream-label">01 &mdash; New Builds</p>
+      <h2>New Builds</h2>
+    </div>
+    <div class="service-header-right">
+      <p>We deliver custom residential new builds working closely with architects, certifiers, and consultants from concept through to practical completion. Our trade background means we understand what is being built at every stage, not just how to manage it.</p>
+    </div>
+  </div>
+  <div class="service-tiles">
+    <div class="service-tile">
+      <h4>Custom Homes and Alterations</h4>
+      <p>End to end delivery of custom residential new homes and alterations, working closely with your architect and consultants from DA through to handover.</p>
+    </div>
+    <div class="service-tile">
+      <h4>Residential Development and Extensions</h4>
+      <p>Management of small scale residential development projects including dual occupancies, knockdown rebuilds, and extensions.</p>
+    </div>
+    <div class="service-tile">
+      <h4>Structural Carpentry and Framing</h4>
+      <p>Timber framing, roof structures, and carpentry packages delivered by a qualified tradesperson with hands on site experience.</p>
+    </div>
+    <div class="service-tile">
+      <h4>Project and Site Management</h4>
+      <p>Full project management from planning and approvals through to handover, with clear communication and structured delivery throughout.</p>
+    </div>
+  </div>
+  <div class="projects-grid" id="projects">
+    <div style="grid-column: 1 / -1; margin-top: 3rem;">
+      <p class="projects-note">The following projects represent residential construction experience delivered by Jibril El-Ahmad prior to establishing Stud and Beam Constructions.</p>
+    </div>
+    <div class="project-card">
+      <div class="project-photo" style="background-image: url('house1.png'); background-repeat: no-repeat; background-size: cover;"><p class="project-photo-text"></p></div>
+    <div class="project-info">
+      <h4>31 Dillies Lane — Tahmoor</h4>
+      <p class="project-desc">New 4 bedroom, 2 bathroom family home at Tahmoor, delivered by Stud and Beam including structural carpentry, internal fitout, and all associated construction works.</p>
+      <div class="project-meta">
+        <div class="project-meta-item"><span>Client</span><p>Private Client</p></div>
+        <div class="project-meta-item"><span>Year</span><p>2022</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="project-card">
+    <div class="project-photo" style="background-image: url('house2.jpg'); background-repeat: no-repeat; background-size: cover;"><p class="project-photo-text"></p></div>
+    <div class="project-info">
+      <h4>21 Dillies Lane — Tahmoor</h4>
+      <p class="project-desc">New 4 bedroom, 2 bathroom family home at Tahmoor, delivered by Stud and Beam including structural carpentry, internal fitout, and all associated construction works.</p>
+      <div class="project-meta">
+        <div class="project-meta-item"><span>Client</span><p>Private Client</p></div>
+        <div class="project-meta-item"><span>Year</span><p>2022</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="project-card">
+    <div class="project-photo" style="background-image: url('house4.png'); background-repeat: no-repeat; background-size: cover;"><p class="project-photo-text"></p></div>
+    <div class="project-info">
+      <h4>196 Chisholm Road — Auburn</h4>
+      <p class="project-desc">Construction of a residential duplex at Auburn including structural framing and all associated building works, delivered on programme and to specification.</p>
+      <div class="project-meta">
+        <div class="project-meta-item"><span>Client</span><p>Private Client</p></div>
+        <div class="project-meta-item"><span>Year</span><p>2021</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- REMEDIAL -->
+<section class="service-section mid">
+  <div class="service-header">
+    <div class="service-header-left">
+      <p class="stream-label">02 &mdash; Remedial</p>
+      <h2>Remedial Works</h2>
+    </div>
+    <div class="service-header-right">
+      <p>Our established remedial capability covers defect rectification, facade works, waterproofing remediation, and concrete repair across residential and commercial buildings. We work closely with engineers, strata managers, and consultants to deliver compliant, durable outcomes in live and occupied environments.</p>
+    </div>
+  </div>
+  <div class="service-tiles">
+    <div class="service-tile">
+      <h4>Concrete and Structural Repair</h4>
+      <p>Spalling repairs, crack injection, and structural rectification carried out in accordance with engineering documentation and Australian Standards.</p>
+    </div>
+    <div class="service-tile">
+      <h4>Waterproofing Remediation</h4>
+      <p>Investigation and remediation of failed waterproofing systems across balconies, roofs, podiums, and wet areas.</p>
+    </div>
+    <div class="service-tile">
+      <h4>Facade and External Works</h4>
+      <p>Facade repairs, joint remediation, cladding replacement, and external upgrade works.</p>
+    </div>
+    <div class="service-tile">
+      <h4>Building Defect rectfication</h4>
+      <p>Rectification of building defects, make good works, and targeted upgrades to improve asset performance, safety, and compliance.</p>
+    </div>
+  </div>
+<div class="projects-grid">
+    <div style="grid-column: 1 / -1; margin-top: 3rem;">
+      <p class="projects-note">The following projects represent experience delivered by Key Personnel in a project management capacity while engaged with previous employers.</p>
+    </div>
+    <div class="project-card">
+      <div class="project-photo" style="background-image: url('OTTO 1 - 2.jpg'); background-size: cover; background-position: center;"><p class="project-photo-text"></p></div>
+      <div class="project-info">
+        <h4>OTTO 1 — Apartments</h4>
+        <p class="project-desc">Large scale remedial rectification to a live mixed use residential development. Facade cladding, balustrade, balcony waterproofing, basement cracking, and acoustic works. Over 30 latent conditions managed.</p>
+        <div class="project-meta">
+          <div class="project-meta-item"><span>Client</span><p>Owners SP 91033</p></div>
+          <div class="project-meta-item"><span>Value</span><p>$7,168,600</p></div>
+          <div class="project-meta-item"><span>Completed</span><p>Mar 2024</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-photo" style="background-image: url('wsu-blacktown1.jpg'); background-size: cover; background-position: center;"><p class="project-photo-text"></p></div>
+      <div class="project-info">
+        <h4>WSU — Blacktown Clinical School</h4>
+        <p class="project-desc">Combustible ACP cladding replacement delivered to meet fire safety, compliance, and operational requirements.</p>
+        <div class="project-meta">
+          <div class="project-meta-item"><span>Client</span><p>Western Sydney University</p></div>
+          <div class="project-meta-item"><span>Value</span><p>$1,496,850</p></div>
+          <div class="project-meta-item"><span>Completed</span><p>Dec 2025</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-photo" style="background-image: url('Granville PS.png');"><p class="project-photo-text"></p></div>
+      <div class="project-info">
+        <h4>Granville Police Station</h4>
+        <p class="project-desc">Fire safety driven ACP cladding replacement to achieve facade compliance while maintaining operations of the active facility.</p>
+        <div class="project-meta">
+          <div class="project-meta-item"><span>Client</span><p>Downer</p></div>
+          <div class="project-meta-item"><span>Value</span><p>$495,667</p></div>
+          <div class="project-meta-item"><span>Completed</span><p>Jun 2025</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-photo" style="background-image: url('100 pac hwy.jpg');"><p class="project-photo-text"></p></div>
+      <div class="project-info">
+        <h4>100 Pacific Highway, North Sydney</h4>
+        <p class="project-desc">Balcony leak detection and membrane repair works comprising investigation of water ingress and targeted waterproofing rectification.</p>
+        <div class="project-meta">
+          <div class="project-meta-item"><span>Client</span><p>ISPT Pty Ltd</p></div>
+          <div class="project-meta-item"><span>Value</span><p>$565,730</p></div>
+          <div class="project-meta-item"><span>Completed</span><p>Sep 2025</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-photo" style="background-image: url('The Rocks, Sydney.jpg');"><p class="project-photo-text"></p></div>
+      <div class="project-info">
+        <h4>29 to 31 George Street, The Rocks</h4>
+        <p class="project-desc">Heritage upgrade works comprising stone conservation, roofing and drainage remediation, and structural timber repairs under Heritage Council approvals.</p>
+        <div class="project-meta">
+          <div class="project-meta-item"><span>Client</span><p>CBRE Pty Ltd</p></div>
+          <div class="project-meta-item"><span>Value</span><p>$1,026,820</p></div>
+          <div class="project-meta-item"><span>Completed</span><p>Jan 2024</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- FITOUT -->
+<section class="service-section dark">
+  <div class="service-header">
+    <div class="service-header-left">
+      <p class="stream-label">03 &mdash; Fit-Out</p>
+      <h2>Fit-Out</h2>
+    </div>
+    <div class="service-header-right">
+      <p>We deliver commercial fit outs across office, retail, and hospitality tenancies. Our approach combines careful pre-construction planning with disciplined on-site delivery, managing trades, programme, and quality to ensure tenancies are handed over on time and to specification.</p>
+    </div>
+  </div>
+  <div class="service-tiles">
+    <div class="service-tile">
+      <h4>Office Fit-Out</h4>
+      <p>Delivery of commercial office fit outs from base build through to full tenancy completion including partitioning, joinery, and services coordination.</p>
+    </div>
+    <div class="service-tile">
+      <h4>Retail Fit-Out</h4>
+      <p>Retail tenancy fit outs delivered to brand standards with strong attention to programme, compliance, and quality of finish.</p>
+    </div>
+    <div class="service-tile">
+      <h4>Hospitality Fit-Out</h4>
+      <p>Cafe, restaurant, and hospitality fit outs managed with an understanding of the operational demands and tight delivery timelines of the industry.</p>
+    </div>
+    <div class="service-tile">
+      <h4>Refurbishment and Upgrade</h4>
+      <p>Refurbishment of existing commercial tenancies including make good works, upgrades, and reconfigurations.</p>
+    </div>
+  </div>
+  <div class="projects-grid">
+  <div style="grid-column: 1 / -1; margin-top: 3rem;">
+    <p class="projects-note">The following projects represent commercial fit out experience delivered by Jibril El-Ahmad and the Stud and Beam team.</p>
+  </div>
+  <div class="project-card">
+    <div class="project-photo" style="background-image: url('nh-blacktown.jpg');"><p class="project-photo-text"></p></div>
+    <div class="project-info">
+      <h4>Nature's Hair — Westpoint Blacktown</h4>
+      <p class="project-desc">Full shopfit out for Nature's Hair franchise tenancy at Westpoint Blacktown, delivered to brand standards and completed on programme.</p>
+      <div class="project-meta">
+        <div class="project-meta-item"><span>Client</span><p>Nature's Hair</p></div>
+        <div class="project-meta-item"><span>Year</span><p>2024</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="project-card">
+    <div class="project-photo" style="background-image: url('sup-blk.png');"><p class="project-photo-text"></p></div>
+    <div class="project-info">
+      <h4>Supplement Wholesalers — Blacktown</h4>
+      <p class="project-desc">Fitout of second retail location for Supplement Wholesalers at Blacktown, delivering a high quality store environment to support the brand's continued growth.</p>
+      <div class="project-meta">
+        <div class="project-meta-item"><span>Client</span><p>Supplement Wholesalers</p></div>
+        <div class="project-meta-item"><span>Year</span><p>2025</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="project-card">
+    <div class="project-photo" style="background-image: url('luxuria watches.jpg');"><p class="project-photo-text"></p></div>
+    <div class="project-info">
+      <h4>Luxuria Watches — 375 George Street, Sydney</h4>
+      <p class="project-desc">Fitout of a luxury watch retail tenancy at 375 George Street Sydney, delivering a refined and high end environment befitting the Luxuria Watches brand.</p>
+      <div class="project-meta">
+        <div class="project-meta-item"><span>Client</span><p>Luxuria Watches</p></div>
+        <div class="project-meta-item"><span>Year</span><p>2024</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="process-header">
+    <div class="gold-line"></div>
+    <h2>How We Work</h2>
+    <p>The same four stage process across every project, every time.</p>
+  </div>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="step-num">01</div>
+      <p class="step-title">Review and Planning</p>
+      <p class="step-desc">We review documentation, site conditions, design intent, and access requirements to clearly define scope, methodology, and programme before we start.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">02</div>
+      <p class="step-title">Coordination and Site Setup</p>
+      <p class="step-desc">We coordinate with architects, engineers, consultants, strata, or building management to align all stakeholders and establish site controls before works commence.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">03</div>
+      <p class="step-title">Controlled Delivery</p>
+      <p class="step-desc">Works are delivered in accordance with approved methodologies with regular progress updates, quality checks, and active issue management throughout.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">04</div>
+      <p class="step-title">Completion and Close Out</p>
+      <p class="step-desc">We complete all works, address defects, and provide required documentation including warranties and handover records to support sign off.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-left">
+    <div class="gold-line"></div>
+    <h2>Let's Work <em>Together</em></h2>
+    <p>Whether you are an architect looking for a reliable builder, a developer planning a new project, or a building owner dealing with defects or maintenance, we welcome the conversation.</p>
+  </div>
+  <div class="contact-right">
+    <p class="contact-name">Jibril El-Ahmad</p>
+    <p class="contact-role">Director &nbsp;|&nbsp; Stud and Beam Constructions</p>
+    <div class="contact-details">
+      <div class="contact-detail">
+        <span class="contact-detail-label">Email</span>
+        <span class="contact-detail-value">info@studandbeam.com.au</span>
+      </div>
+      <div class="contact-detail">
+        <span class="contact-detail-label">Phone</span>
+        <span class="contact-detail-value">0474 812 512</span>
+      </div>
+      <div class="contact-detail">
+        <span class="contact-detail-label">Location</span>
+        <span class="contact-detail-value">Sydney, NSW</span>
+      </div>
+    </div>
+    <div class="contact-divider"></div>
+    <p class="contact-licence">
+      Builders Licence: 470860C<br>
+      Building Practitioner: BUP4254551
+    </p>
+  </div>
+  <div class="closing-line">
+    New Builds. Renovations. Remedial Works. &nbsp;&mdash;&nbsp; Built from the Ground Up. Ready for Whatever Comes Next.
+  </div>
+</section>
+
+</body>
+</html>
